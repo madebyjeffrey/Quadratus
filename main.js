@@ -34,59 +34,86 @@ function CreateLand(scene, x, y, height, square)
 {
 	var geometry = new THREE.CubeGeometry( square, height * square, square );
 	
-	var material = new THREE.MeshLambertMaterial( { color: 0xffffff, shading: THREE.FlatShading, overdraw: true } );
+	var material = new THREE.MeshLambertMaterial( { color: 0xff00ff, shading: THREE.FlatShading, overdraw: true, wireframe: false } );
 
 	var cube = new THREE.Mesh(geometry, material);
 	
 	cube.position.x = x * square + square / 2;
 	cube.position.y = height * square / 2;
 	cube.position.z = y * square + square / 2;
-				
-    scene.add(cube);
+	
+	scene.add(cube);
 }
 
 // type 0: along x, type 1: along y
 function CreateRamp(scene, x1, y1, height1, height2, type, square)
 {
 	var geometry = new THREE.Geometry();
+	var s = square;
+	var h1 = square * height1;
+	var h2 = square * height2;
 	
-	if (type == 0)
-	{
-		geometry.vertices.push( new THREE.Vector3( 0, 0, 0 ) );
-		geometry.vertices.push( new THREE.Vector3( 0, height1 * square, 0 ) );
-		geometry.vertices.push( new THREE.Vector3( square, height1 * square, 0) );
-		geometry.vertices.push( new THREE.Vector3( square, 0, 0));
-	
-		geometry.vertices.push( new THREE.Vector3( 0, height2 * square, square ) );
-		geometry.vertices.push( new THREE.Vector3( square, height2 * square, square ) );
-	
-	
-		geometry.faces.push( new THREE.Face4(0, 1, 2, 3) );
-		geometry.faces.push( new THREE.Face4(0, 3, 5, 4) );
-		geometry.faces.push( new THREE.Face3(0, 4, 1) );
-		geometry.faces.push( new THREE.Face3(3, 2, 5) );
-		geometry.faces.push( new THREE.Face4(1, 4, 5, 2) );
-	}
-	else {
-		geometry.vertices.push( new THREE.Vector3( 0, 0, 0 ) );
-		geometry.vertices.push( new THREE.Vector3( 0, 0, square ) );
-		geometry.vertices.push( new THREE.Vector3( 0, height1 * square, 0) );
-		geometry.vertices.push( new THREE.Vector3( 0, height1 * square, square));
-	
-		geometry.vertices.push( new THREE.Vector3( square, height2 * square, 0 ) );
-		geometry.vertices.push( new THREE.Vector3( square, height2 * square, square ) );
-	
-	
-		geometry.faces.push( new THREE.Face4(1, 3, 2, 0) );
-		geometry.faces.push( new THREE.Face4(3, 5, 4, 2) );
-		geometry.faces.push( new THREE.Face3(0, 2, 4) );
-		geometry.faces.push( new THREE.Face3(5, 3, 1) );
-		geometry.faces.push( new THREE.Face4(0, 4, 5, 1) );
+  // Base vertices
+	geometry.vertices.push( new THREE.Vector3( 0, 0, 0 ) );
+	geometry.vertices.push( new THREE.Vector3( 0, 0, s ) );
+	geometry.vertices.push( new THREE.Vector3( s, 0, s) );
+	geometry.vertices.push( new THREE.Vector3( s, 0, 0));
+
+	// Base face
+	geometry.faces.push( new THREE.Face4(3, 2, 1, 0) );
 		
+	if ( type == 1 || type == 2 )
+	{
+	  // Ramp vertices
+	  if ( type == 1 )
+	  {
+		  geometry.vertices.push( new THREE.Vector3( 0, h2, s ) );
+	    geometry.vertices.push( new THREE.Vector3( s, h2, s ) );
+    }	
+    else if ( type == 2 )
+    {
+		  geometry.vertices.push( new THREE.Vector3( 0, h2, 0 ) );
+	    geometry.vertices.push( new THREE.Vector3( s, h2, 0 ) );
+    }
+
+    // Back/ramp faces
+	  geometry.faces.push( new THREE.Face4(2, 5, 4, 1) );
+	  geometry.faces.push( new THREE.Face4(4, 5, 3, 0) );
+	  
+		// Side faces
+		geometry.faces.push( new THREE.Face3(1, 4, 0) );
+		geometry.faces.push( new THREE.Face3(5, 2, 3) );
+
+	}
+	else 
+	{
+		// Ramp vertices
+	  if ( type == 3 )
+	  {
+		  geometry.vertices.push( new THREE.Vector3( s, h2, 0 ) );
+	    geometry.vertices.push( new THREE.Vector3( s, h2, s ) );
+    }	
+    else if ( type == 4 )
+    {
+		  geometry.vertices.push( new THREE.Vector3( 0, h2, 0 ) );
+	    geometry.vertices.push( new THREE.Vector3( 0, h2, s ) );
+    }
+
+    // Back/ramp faces
+	  geometry.faces.push( new THREE.Face4(2, 3, 4, 5) );
+	  geometry.faces.push( new THREE.Face4(0, 1, 5, 4) );
+	  
+		// Side faces
+		geometry.faces.push( new THREE.Face3(4, 3, 0) );
+		geometry.faces.push( new THREE.Face3(1, 2, 5) );
 	}
 	
+	// Randomize face colours
+	for ( var i = 0; i < geometry.faces.length; ++i )
+    geometry.faces[i].color.setRGB( Math.random()/2, Math.random()/2, Math.random()/2 );
 	
-	var material = new THREE.MeshLambertMaterial( { color: 0xffffff, shading: THREE.FlatShading, overdraw: true } );
+	var material = new THREE.MeshBasicMaterial( { color: 0xffffff, shading: THREE.FlatShading, overdraw: true, vertexColors: THREE.FaceColors, wireframe: false } );
+//	geometry.__dirtyColors = true;
 	
 	var ramp = new THREE.Mesh(geometry, material);
 	ramp.position.x = x1 * square;
@@ -94,53 +121,6 @@ function CreateRamp(scene, x1, y1, height1, height2, type, square)
 	ramp.position.z = y1 * square;
 	
 	scene.add(ramp);
+	
 } 
 
-// type 0: along x, type 1: along y
-function CreateRamp2(scene, x, y, start_height, height1, height2, type, square)
-{
-	var geometry = new THREE.Geometry();
-	
-	geometry.vertices.push( new THREE.Vector3( 0, height1 * square, 0 ) );
-	geometry.vertices.push( new THREE.Vector3( square, height1 * square, 0 ) );
-	geometry.vertices.push( new THREE.Vector3( square, height1 * square, square) );
-	geometry.vertices.push( new THREE.Vector3( 0, height1 * square, square) );
-	
-	geometry.faces.push( new THREE.Face4(0, 3, 2, 1));
-	
-	if (type == 0)
-	{
-		geometry.vertices.push( new THREE.Vector3( 0, height2 * square, 0 ) );
-		geometry.vertices.push( new THREE.Vector3( square, height2 * square, 0 ) );
-		
-		geometry.faces.push( new THREE.Face3(0, 4, 3) );
-		geometry.faces.push( new THREE.Face4(0, 1, 5, 4) );
-		geometry.faces.push( new THREE.Face3(1, 2, 5) );
-		geometry.faces.push( new THREE.Face4(4, 5, 2, 3) );
-	}
-	else {
-		geometry.vertices.push( new THREE.Vector3( 0, height2 * square, 0 ) );
-		geometry.vertices.push( new THREE.Vector3( 0, height2 * square, square ) );
-
-		geometry.faces.push( new THREE.Face3(0, 1, 4) );
-		geometry.faces.push( new THREE.Face4(4, 1, 2, 5) );
-		geometry.faces.push( new THREE.Face3(2, 3, 5) );
-		geometry.faces.push( new THREE.Face4(0, 4, 5, 3) );
-
-	}
-	
-	var material = new THREE.MeshLambertMaterial( { color: 0xffffff, shading: THREE.FlatShading, overdraw: true } );
-	
-	var ramp = new THREE.Mesh(geometry, material);
-	ramp.position.x = x * square;
-	ramp.position.y = start_height;
-	ramp.position.z = y * square;
-	
-	scene.add(ramp);
-	
-	CreateLand(scene, x, y, height1, square);
-	
-	
-	
-
-}

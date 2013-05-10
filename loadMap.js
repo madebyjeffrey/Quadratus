@@ -17,17 +17,8 @@ function loadMap(scene) {
     if (c.type == 0) {
       CreateLand(scene, x, y, c.h1, 50);
     }
-    else if (c.type == 1) {
-      CreateRamp(scene, x, y, c.h1, c.h2, 0, 50);
-    }
-    else if (c.type == 2) {
-      CreateRamp(scene, x, y, c.h2, c.h1, 0, 50);
-    }
-    else if (c.type == 3) {
-      CreateRamp(scene, x, y, c.h1, c.h2, 1, 50);
-    }
-    else if (c.type == 4) {
-      CreateRamp(scene, x, y, c.h2, c.h1, 1, 50);
+    else {
+      CreateRamp(scene, x, y, c.h1, c.h2, c.type, 50);
     }
   }
   var oReq = new XMLHttpRequest();
