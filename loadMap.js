@@ -1,7 +1,8 @@
 /* 	Quadratus – Experimental Cube Map Using Three.JS
  *  Parts written by 
  *  	Jeffrey Drake
- *      Chris Droulliard
+ *      Chris Drouillard
+ *      Adam Heinermann
  *      Original Three.JS team (based on a demo)
  *   
  * 	Licensed under the original MIT license of the original code.
@@ -11,39 +12,30 @@
 
 function loadMap(scene) {
   function show(c,x,y) {
-    console.log("(%d,%d) %d %d %d",x,y,c.type,c.h1,c.h2);
+    console.log("(%d,%d) %d %d", x, y, c % 256, c / 256);
   }
-  function loadCell(c, x, y) {
-    if (c.type == 0) {
-      CreateLand(scene, x, y, c.h1, 50);
-    }
-    else {
-      CreateRamp(scene, x, y, c.h1, c.h2, c.type, 50);
+  
+  // Format:  threshold * 256 + height
+  // threshold = 0 if flat
+  // -1 = doesn't exist
+  var level = [ [ 256,  256+1,  256+2,  256+3,  4,  256+3,  256+2,  256+1,  256, -1],
+                [ 256,  256,  256+1,  256+2,  256+3,  256+2,  256+1,  256, 256, -1],
+                [-1, 256,  256,  256+1,  256+2,  256+1, 256, 256, -1, -1],
+                [-1, -1, 256,  256,  256+1,  256, 256, -1, -1, -1],
+                [-1, -1, -1, 256,  256, 256, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+                [-1, -1, -1, -1, -1, -1, 256, 256, 256, -1],
+                [-1, -1, -1, -1,  5, 3*256+2,  2, 256+1, 256, -1],
+                [-1, -1, -1, -1, -1, -1, 256, 256, 256, -1],
+                [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
+              ];
+
+  for ( var y = 0; y < level.length; ++y )
+  {
+    for ( var x = 0; x < level[y].length; ++x )
+    {
+      CreateBlock(x, y, level, 50);
     }
   }
-  var oReq = new XMLHttpRequest();
-  oReq.open("GET", "data.dat", true);
-  oReq.responseType = "arraybuffer";
-  oReq.onload = function (oEvent) {
-    var arrayBuffer = oReq.response;
-    if (arrayBuffer) {
-      var byteArray = new Uint8Array(arrayBuffer);
-      console.log(byteArray);
-      var w = byteArray[0];
-      var h = byteArray[1];
-      var p = 2;
-      for (var i = 0; i < w; ++i) {
-        for (var j = 0; j < h; ++j) { 
-          var c = {
-            type: byteArray[p+4],
-            h1: (byteArray[p] + byteArray[p+1]*256)/4,
-            h2: (byteArray[p+2] + byteArray[p+3]*256)/4,
-          };
-          loadCell(c, i, j);
-          p += 6;
-        }
-      }
-    }
-  };
-  oReq.send(null);
+
 }
