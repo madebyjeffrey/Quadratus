@@ -44,24 +44,124 @@ function IsValid(x, y, map)
   return true;
 }
 
+function CompareHeightForThreshold(desiredHeight, threshold, height)
+{
+  if ( desiredHeight - height < 0 ) // hack
+    return height;
+  return Math.abs(desiredHeight - height) > threshold ? height : desiredHeight;
+}
 function GetHeightForThreshold(x, y, map, threshold, height)
 {
   if ( !IsValid(x, y, map) )
     return height;
-    
-  var newheight = map[y][x]%256;
-  if ( newheight - height < 0 ) // hack
-    return height;
-  return Math.abs(newheight - height) > threshold ? height : newheight;
+   
+  return CompareHeightForThreshold(map[y][x]%256, threshold, height);
 }
+function GetCornerHeight(x,y,map,corners,cornerId,height)
+{
+  if ( !IsValid(x,y,map) )
+    return height;
 
+  return CompareHeightForThreshold(corners[y][x][cornerId], height);
+}
 function GetGreatestHeightDist(h1, h2, h3, hBase)
 {
   var hInter = Math.abs(h1-hBase) > Math.abs(h2-hBase) ? h1 : h2;
   return Math.abs(hInter-hBase) > Math.abs(h3-hBase) ? hInter : h3;
 }
 
-function CreateBlock(x, y, map, gridSize)
+function InitCorners(map, cornerMap)
+{
+  for ( var y = 0; y < map.length; ++y )
+  {
+    cornerMap[y] = new Array(map[y].length);
+    for ( var x = 0; x < map[y].length; ++x )
+    {
+      var h = (map[y][x] % 256);  // height
+
+      cornerMap[y][x] = new Array(4);
+      cornerMap[y][x][0] = h;
+      cornerMap[y][x][1] = h;
+      cornerMap[y][x][2] = h;
+      cornerMap[y][x][3] = h;
+
+      if ( !IsValid(x, y, map) )  // Initial validity check
+        continue;
+
+      var t = map[y][x] / 256;    // threshold
+
+      // Get attachment points
+      var lefth   = GetHeightForThreshold(x-1, y, map, t, h);
+      var toph    = GetHeightForThreshold(x, y-1, map, t, h);
+      var righth  = GetHeightForThreshold(x+1, y, map, t, h);
+      var bottomh = GetHeightForThreshold(x, y+1, map, t, h);
+      
+      var leftToph = GetHeightForThreshold(x-1,y-1,map,t,h);
+      var leftBoth = GetHeightForThreshold(x-1,y+1,map,t,h);
+      var rightToph = GetHeightForThreshold(x+1,y-1,map,t,h);
+      var rightBoth = GetHeightForThreshold(x+1,y+1,map,t,h);
+      
+      // Get min height for top of base cube
+      var minh = Math.min(h, lefth, toph, righth, bottomh, leftToph, leftBoth, rightToph, rightBoth);
+
+      if ( lefth == h && toph == h && righth == h && bottomh == h &&
+            leftToph == h && leftBoth == h && rightToph == h && rightBoth == h) // no ramp
+        continue;
+
+      // Calculate slope vertex heights
+      cornerMap[y][x][0] = GetGreatestHeightDist(lefth, toph, leftToph, h);
+      cornerMap[y][x][1] = GetGreatestHeightDist(lefth, bottomh, leftBoth, h);
+      cornerMap[y][x][2] = GetGreatestHeightDist(righth, bottomh, rightBoth, h);
+      cornerMap[y][x][3] = GetGreatestHeightDist(righth, toph, rightToph, h);
+    }
+  }
+}
+
+function SmoothCorners(map,cornerMap)
+{
+  for ( var y = 0; y < map.length; ++y )
+  {
+    for ( var x = 0; x < map[y].length; ++x )
+    {
+      if ( !IsValid(x, y, map) )  // Initial validity check
+        continue;
+
+      var h = (map[y][x] % 256);  // height
+      var t = map[y][x] / 256;    // threshold
+
+      // Calculate new slope vertex heights
+      cornerMap[y][x][0] = 
+            Math.max( cornerMap[y][x][0],
+                      GetCornerHeight(y-1,x,map,cornerMap,1,h),
+                      GetCornerHeight(y-1,x-1,map,cornerMap,2,h),
+                      GetCornerHeight(y,x-1,map,cornerMap,3,h)
+                );
+
+      cornerMap[y][x][1] = 
+            Math.max( cornerMap[y][x][1],
+                      GetCornerHeight(y+1,x,map,cornerMap,0,h),
+                      GetCornerHeight(y+1,x-1,map,cornerMap,3,h),
+                      GetCornerHeight(y,x-1,map,cornerMap,2,h)
+                );
+
+      cornerMap[y][x][2] = 
+            Math.max( cornerMap[y][x][2],
+                      GetCornerHeight(y+1,x,map,cornerMap,3,h),
+                      GetCornerHeight(y+1,x+1,map,cornerMap,0,h),
+                      GetCornerHeight(y,x+1,map,cornerMap,1,h)
+                );
+
+      cornerMap[y][x][3] = 
+            Math.max( cornerMap[y][x][3],
+                      GetCornerHeight(y-1,x,map,cornerMap,2,h),
+                      GetCornerHeight(y-1,x+1,map,cornerMap,1,h),
+                      GetCornerHeight(y,x+1,map,cornerMap,0,h)
+                );
+    }
+  }
+}
+
+function CreateBlock(x, y, map, cornerMap, gridSize)
 {
   if ( !IsValid(x, y, map) )  // Initial validity check
     return;
@@ -71,19 +171,12 @@ function CreateBlock(x, y, map, gridSize)
   var h = (map[y][x] % 256);  // height
   var t = map[y][x] / 256;    // threshold
 
-  // Get attachment points
-  var lefth   = GetHeightForThreshold(x-1, y, map, t, h);
-  var toph    = GetHeightForThreshold(x, y-1, map, t, h);
-  var righth  = GetHeightForThreshold(x+1, y, map, t, h);
-  var bottomh = GetHeightForThreshold(x, y+1, map, t, h);
-  
-  var leftToph = GetHeightForThreshold(x-1,y-1,map,t,h);
-  var leftBoth = GetHeightForThreshold(x-1,y+1,map,t,h);
-  var rightToph = GetHeightForThreshold(x+1,y-1,map,t,h);
-  var rightBoth = GetHeightForThreshold(x+1,y+1,map,t,h);
-  
   // Get min height for top of base cube
-  var minh = Math.min(h, lefth, toph, righth, bottomh, leftToph, leftBoth, rightToph, rightBoth);
+  var minh = Math.min(h, 
+                      cornerMap[y][x][0],
+                      cornerMap[y][x][1],
+                      cornerMap[y][x][2],
+                      cornerMap[y][x][3]);
 
   // -----------> Create base cube
 	var geometry  = new THREE.CubeGeometry( g, minh*g, g );
@@ -96,8 +189,7 @@ function CreateBlock(x, y, map, gridSize)
 	
 	scene.add(cube);
 	
-	if ( lefth == h && toph == h && righth == h && bottomh == h &&
-	      leftToph == h && leftBoth == h && rightToph == h && rightBoth == h) // no ramp
+	if ( cornerMap[y][x][0] == h && cornerMap[y][x][1] == h && cornerMap[y][x][2] == h && cornerMap[y][x][3] == h ) 
 	  return;
 	
   // -----------> Create Ramp thing
@@ -109,18 +201,13 @@ function CreateBlock(x, y, map, gridSize)
 	geometry.vertices.push( new THREE.Vector3(g, minh*g, g));
 	geometry.vertices.push( new THREE.Vector3(g, minh*g, 0));
 	
-	// Calculate slope vertex heights
-	var leftbot  = GetGreatestHeightDist(lefth, toph, leftToph, h);
-	var lefttop  = GetGreatestHeightDist(lefth, bottomh, leftBoth, h);
-	var righttop = GetGreatestHeightDist(righth, bottomh, rightBoth, h);
-	var rightbot = GetGreatestHeightDist(righth, toph, rightToph, h);
-	
 	// Create slope vertices
-	geometry.vertices.push( new THREE.Vector3(0, leftbot*g, 0));
-	geometry.vertices.push( new THREE.Vector3(0, lefttop*g, g));
-	geometry.vertices.push( new THREE.Vector3(g, righttop*g, g));
-	geometry.vertices.push( new THREE.Vector3(g, rightbot*g, 0));
-	
+	geometry.vertices.push( new THREE.Vector3(0, cornerMap[y][x][0]*g, 0));
+	geometry.vertices.push( new THREE.Vector3(0, cornerMap[y][x][1]*g, g));
+	geometry.vertices.push( new THREE.Vector3(g, cornerMap[y][x][2]*g, g));
+	geometry.vertices.push( new THREE.Vector3(g, cornerMap[y][x][3]*g, 0));
+
+  // Create geometry faces
 	// Note: could be a for loop with: (i, (i+1)%4, 4+(i+1)%4, 4+i)
 	geometry.faces.push( new THREE.Face4(0, 1, 5, 4) );
 	geometry.faces.push( new THREE.Face4(1, 2, 6, 5) );
@@ -133,7 +220,8 @@ function CreateBlock(x, y, map, gridSize)
 	for ( var i = 0; i < geometry.faces.length; ++i )
     geometry.faces[i].color.setRGB( Math.random()/2, Math.random()/2, Math.random()/2 );
 	
-	var material = new THREE.MeshBasicMaterial( { color: 0xffffff, shading: THREE.FlatShading, overdraw: true, vertexColors: THREE.FaceColors, wireframe: false } );
+	var material = new THREE.MeshBasicMaterial( { color: 0xffffff, shading: THREE.FlatShading,
+                                                overdraw: true, vertexColors: THREE.FaceColors, wireframe: false } );
 	
 	var ramp = new THREE.Mesh(geometry, material);
 	ramp.position.x = x * g;
