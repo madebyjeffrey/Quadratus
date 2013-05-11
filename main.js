@@ -178,28 +178,14 @@ function CreateBlock(x, y, map, cornerMap, gridSize)
                       cornerMap[y][x][2],
                       cornerMap[y][x][3]);
 
-  // -----------> Create base cube
-	var geometry  = new THREE.CubeGeometry( g, minh*g, g );
-	var material  = new THREE.MeshLambertMaterial( { color: 0xffffff, shading: THREE.FlatShading, overdraw: true, wireframe: false } );
-	var cube      = new THREE.Mesh(geometry, material);
-	
-	cube.position.x = x * g + g / 2;
-	cube.position.y = minh*g / 2;
-	cube.position.z = y * g + g / 2;
-	
-	scene.add(cube);
-	
-	if ( cornerMap[y][x][0] == h && cornerMap[y][x][1] == h && cornerMap[y][x][2] == h && cornerMap[y][x][3] == h ) 
-	  return;
-	
-  // -----------> Create Ramp thing
+  // -----------> Create block
 	var geometry = new THREE.Geometry();
 
-  // Base vertices (don't need base face since it is an attachment)
-	geometry.vertices.push( new THREE.Vector3(0, minh*g, 0));
-	geometry.vertices.push( new THREE.Vector3(0, minh*g, g));
-	geometry.vertices.push( new THREE.Vector3(g, minh*g, g));
-	geometry.vertices.push( new THREE.Vector3(g, minh*g, 0));
+  // Base vertices 
+	geometry.vertices.push( new THREE.Vector3(0, 0, 0));
+	geometry.vertices.push( new THREE.Vector3(0, 0, g));
+	geometry.vertices.push( new THREE.Vector3(g, 0, g));
+	geometry.vertices.push( new THREE.Vector3(g, 0, 0));
 	
 	// Create slope vertices
 	geometry.vertices.push( new THREE.Vector3(0, cornerMap[y][x][0]*g, 0));
@@ -208,6 +194,8 @@ function CreateBlock(x, y, map, cornerMap, gridSize)
 	geometry.vertices.push( new THREE.Vector3(g, cornerMap[y][x][3]*g, 0));
 
   // Create geometry faces
+  geometry.faces.push( new THREE.Face4(3,2,1,0) ); // bottom
+
 	// Note: could be a for loop with: (i, (i+1)%4, 4+(i+1)%4, 4+i)
 	geometry.faces.push( new THREE.Face4(0, 1, 5, 4) );
 	geometry.faces.push( new THREE.Face4(1, 2, 6, 5) );
