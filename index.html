@@ -13,20 +13,47 @@
         <nav class="navbar">
             <div class="navbar-inner">
                 <span class="brand">Quadratus</span>
+                <ul class="nav">
+                    <li><a href="#newmapDialog" role="button" data-toggle="modal">New</a></li>
+                </ul>
             </div>
         </nav>
-       
+        
+        
+        
+        <div id="newmapDialog" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>New Map</h3>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <fieldset>
+                        <label>Width</label>
+                        <input type="text">
+                        <label>Height</label>
+                        <input type="text">
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="newmap">New Map</button>
+            </div>
+        </div>
+        
+                
         <script src="js/three.min.js"></script>
         <script src="js/stats.min.js"></script>
         <script src="js/TrackballControls.js"></script>
-        <script src="js/map.js"></script>
+<!--        <script src="js/map.js"></script>
         <script src="js/loadMap.js"></script>
-
+-->
         <script src="js/jquery-2.0.0.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
-        
         <script src="js/main.js"></script> 
+        <script src="js/quadratus.js"></script>
 
         
     </body>
