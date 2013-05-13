@@ -1,13 +1,3 @@
-/* 	Quadratus – Experimental Cube Map Using Three.JS
- *  Parts written by 
- *  	Jeffrey Drake
- *      Chris Drouillard
- *      Adam Heinermann
- *      Original Three.JS team (based on a demo)
- *   
- * 	Licensed under the original MIT license of the original code.
- */
-
 function CreateGrid(scene, width, depth, square)
 {
 	var geometry = new THREE.Geometry();

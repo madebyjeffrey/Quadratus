@@ -1,0 +1,14 @@
+/* 
+    Document   : main
+    Created on : 12-May-2013, 9:50:35 PM
+    Author     : drakej
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    font-family: Monospace;
+    background-color: #f0f0f0;
+    margin: 0px;
+    overflow: hidden;
+}
