@@ -2,23 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="536c73c4-9819-41f5-9c22-f8d02ecd9566" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/loadMap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/main2.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/map.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.coffee" afterPath="$PROJECT_DIR$/js/main.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js" afterPath="$PROJECT_DIR$/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/quadratus.coffee" afterPath="$PROJECT_DIR$/js/quadratus.coffee" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Quadratus.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368506369946" ignored="false" />
-    <file path="/index.html" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368480687167" ignored="false" />
-    <file path="/quadratus.coffee" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368500063439" ignored="false" />
-    <file path="/main.coffee" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368499362911" ignored="false" />
-    <file path="/a.coffee" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368494434663" ignored="false" />
+    <file path="/Dummy.txt" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1369105294087" ignored="false" />
+    <file path="/index.html" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368763656859" ignored="false" />
+    <file path="/quadratus.coffee" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368507696136" ignored="false" />
+    <file path="/main.coffee" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1369105572143" ignored="false" />
+    <file path="/a.coffee" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368507058606" ignored="false" />
+    <file path="$PROJECT_DIR$/../PerlinNoise/.idea/workspace.xml" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368757910136" ignored="false" />
+    <file path="/Makefile" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368758115270" ignored="false" />
+    <file path="$PROJECT_DIR$/../Perlin1/index.html" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368763659852" ignored="false" />
+    <file path="$PROJECT_DIR$/../Perlin1/main.coffee" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1369105572539" ignored="false" />
+    <file path="$PROJECT_DIR$/../Perlin1/main.js.map" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368767344890" ignored="false" />
+    <file path="$PROJECT_DIR$/../Perlin1/main.js" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1369105576992" ignored="false" />
+    <file path="/fragment.js" changelist="536c73c4-9819-41f5-9c22-f8d02ecd9566" time="1368762295810" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,28 +39,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.coffee" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/main.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="0" selection-start="2086" selection-end="2086" vertical-scroll-proportion="0.0">
+            <state line="28" column="41" selection-start="543" selection-end="543" vertical-scroll-proportion="-0.9658887">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="quadratus.coffee" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="quadratus.coffee" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/quadratus.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="45" selection-start="3020" selection-end="3020" vertical-scroll-proportion="0.9191176">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="quadratus.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/quadratus.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="9" selection-start="1817" selection-end="1817" vertical-scroll-proportion="0.0">
+            <state line="81" column="0" selection-start="3234" selection-end="3234" vertical-scroll-proportion="-33.0">
               <folding />
             </state>
           </provider>
@@ -100,7 +92,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="11" />
+    <option name="x" value="17" />
     <option name="y" value="22" />
     <option name="width" value="1346" />
     <option name="height" value="728" />
@@ -131,7 +123,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -166,18 +157,19 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="preferences.sourceCode.CoffeeScript" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Work/CoffeeScriptRedux/bin/coffee" />
+    <property name="options.lastSelected" value="settings" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PerlinNoise" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PublishConfig" serverName="Local" serverId="f39961cc-1ba9-4f1b-80b2-caaec0434b44">
     <servers>
@@ -237,13 +229,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="11" y="22" width="1346" height="728" extended-state="0" />
-    <editor active="false" />
+    <frame x="17" y="22" width="1346" height="728" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2494331" sideWeight="0.7508197" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2494331" sideWeight="0.7508197" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24918033" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295082" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -321,6 +313,69 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/js/main.coffee">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="28" selection-start="1418" selection-end="1418" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/quadratus.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="0" selection-start="3234" selection-end="3234" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="75" selection-start="907" selection-end="907" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="28" selection-start="1418" selection-end="1418" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/quadratus.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="0" selection-start="3234" selection-end="3234" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="75" selection-start="907" selection-end="907" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="30" selection-start="1418" selection-end="1418" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/quadratus.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="51" selection-start="3234" selection-end="3234" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="75" selection-start="907" selection-end="907" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.coffee">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="89" column="0" selection-start="2086" selection-end="2086" vertical-scroll-proportion="0.0">
           <folding />
         </state>
@@ -333,13 +388,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/quadratus.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="9" selection-start="1817" selection-end="1817" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="75" selection-start="907" selection-end="907" vertical-scroll-proportion="0.0">
@@ -350,32 +398,20 @@
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="75" selection-start="907" selection-end="907" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="89" selection-end="89" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/main.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="0" selection-start="2086" selection-end="2086" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/quadratus.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="9" selection-start="1817" selection-end="1817" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/quadratus.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="45" selection-start="3020" selection-end="3020" vertical-scroll-proportion="0.9191176">
+        <state line="81" column="0" selection-start="3234" selection-end="3234" vertical-scroll-proportion="-33.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/main.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="41" selection-start="543" selection-end="543" vertical-scroll-proportion="-0.9658887">
           <folding />
         </state>
       </provider>

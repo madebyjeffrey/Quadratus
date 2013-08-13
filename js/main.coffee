@@ -53,6 +53,7 @@ main = () ->
     window.stats = stats
     
     container.append stats.domElement
+
     
     
     
@@ -86,6 +87,7 @@ animate = () ->
 onDocumentMouseMove = (e) ->
     e.preventDefault()
     window.game.updatePosition e.clientX, e.clientY
+
 
 
 #    console.log 'x: ' + window.game.mouse2d.x + ' y: ' + window.game.mouse2d.y

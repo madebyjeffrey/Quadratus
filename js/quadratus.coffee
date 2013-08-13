@@ -12,7 +12,7 @@ class Quadratus
         #        @scene.add sphere
 
         @plane = new THREE.Mesh (new THREE.PlaneGeometry 400, 400, 10, 10), (new THREE.MeshBasicMaterial(color: 0x555555, wireframe: true))
-        @plane.rotation.x = -Math.PI / 2
+#        @plane.rotation.x = -Math.PI / 2
         reportPos @plane.position
 
         @scene.add @plane
@@ -65,11 +65,17 @@ class Quadratus
         return null
 
     updatePosition: (x, y) ->
-        vector = new THREE.Vector3 (x / window.container.width()) * 2 - 1, (y / window.container.height()) * 2 - 1, 0.5
-#        @projector.unprojectVector(vector, @camera)
-        ray = @projector.pickingRay vector, @camera
-# ray = @projector.pickingRay @camera.position, vector.sub(@camera.position).normalize()
+        vector = new THREE.Vector3 (x / window.container.width()) * 2 - 1, -(y / window.container.height()) * 2 + 1, 0.5
+        @projector.unprojectVector vector, @camera
+
+        ray = new THREE.Raycaster @camera.position, vector.sub(@camera.position).normalize()
+
         intersects = ray.intersectObject @plane
         if intersects.length > 0
-            reportPos    intersects[0].point
+            vecobj = intersects[0].point
+            @plane.worldToLocal(vecobj)
+
+#                .applyMatrix4(new THREE.Matrix4().getInverse(@plane.matrixWorld))
+#            vecobj = new THREE.Matrix4().getInverse(@plane.matrixWorld).multiplyVector3(intersects[0].point)
+            reportPos vecobj
 
